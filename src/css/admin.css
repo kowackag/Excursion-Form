@@ -38,7 +38,8 @@ ul {
     width: 30%;
 }
 
-.uploader, .order {
+.uploader,
+.order {
     border-bottom: 1px solid #bbb;
     margin-bottom: 20px;
     padding-bottom: 20px;
@@ -50,4 +51,8 @@ ul {
 
 .form__field--longtext {
     height: 100px;
+}
+
+.excursions__item--prototype {
+    display: none;
 }

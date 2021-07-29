@@ -1,4 +1,39 @@
 {
-    "excursions": [],
-    "orders": []
+  "excursions": [
+    {
+      "id": 1,
+      "name": "Krakow",
+      "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime! Nemo, nobis veritatis?",
+      "adultsPrice": 100,
+      "childrenPrice": 50
+    },
+    {
+      "id": 2,
+      "name": "Warszawa",
+      "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime! Nemo, nobis veritatis?",
+      "adultsPrice": 120,
+      "childrenPrice": 60
+    },
+    {
+      "name": "kołobrzeg",
+      "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime! ",
+      "childrenPrice": "78",
+      "id": 3
+    },
+    {
+      "name": "",
+      "description": "",
+      "adultsPrice": "",
+      "childrenPrice": "",
+      "id": 4
+    },
+    {
+      "name": "",
+      "description": "",
+      "adultsPrice": "",
+      "childrenPrice": "",
+      "id": 5
+    }
+  ],
+  "orders": []
 }
