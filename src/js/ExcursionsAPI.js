@@ -1,8 +1,8 @@
 class ExcursionsAPI {
     constructor() {
         this.url = 'http://localhost:3000/excursions';
+        this.prototype = document.querySelector('.excursions__item--prototype');
     }
-
     loadData() {
         this._fetch()
             .then(data => {
@@ -11,8 +11,8 @@ class ExcursionsAPI {
             .catch(err => console.error(err));
     }
     insertData(data) {
-        console.log(data);
         const ulEl = document.querySelector('.excursions');
+        ulEl.innerHTML = '';
 
         data.forEach(element => {
             const newLiEl = this._createLiEl(element);
@@ -30,9 +30,6 @@ class ExcursionsAPI {
                 adultsPrice,
                 childrenPrice
             } = e.target.elements;
-            console.log(name.value, description.value,
-                adultsPrice,
-                childrenPrice);
             const data = {
                 name: name.value,
                 description: description.value,
@@ -63,8 +60,7 @@ class ExcursionsAPI {
             });
     }
     _createLiEl(element) {
-        const liEl = document.querySelector('.excursions__item');
-        const newLiEl = liEl.cloneNode(true);
+        const newLiEl = this.prototype.cloneNode(true);
         newLiEl.dataset.id = element.id;
         const titleEl = newLiEl.querySelector('.excursions__title');
         titleEl.innerText = element.name;

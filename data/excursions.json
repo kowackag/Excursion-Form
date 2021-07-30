@@ -1,6 +1,5 @@
 {
-  "excursions": [
-    {
+  "excursions": [{
       "id": 1,
       "name": "Krakow",
       "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime! Nemo, nobis veritatis?",
@@ -21,18 +20,11 @@
       "id": 3
     },
     {
-      "name": "",
-      "description": "",
-      "adultsPrice": "",
-      "childrenPrice": "",
+      "name": "krynica",
+      "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime! Nemo, nobis veritatis?",
+      "adultsPrice": "190",
+      "childrenPrice": "45",
       "id": 4
-    },
-    {
-      "name": "",
-      "description": "",
-      "adultsPrice": "",
-      "childrenPrice": "",
-      "id": 5
     }
   ],
   "orders": []
