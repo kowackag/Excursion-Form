@@ -1,14 +1,14 @@
 class ExcursionsAPI {
     constructor() {
-        this.url = 'http://localhost:3000/excursions';
+        this.url = 'http://localhost:3000';
         // this.prototype = document.querySelector('.excursions__item--prototype');
     }
 
-loadData() {
-      return this._fetch()
+    loadData() {
+        return this._fetch()
     }
 
-addData(data) {
+    addData(data) {
         const options = {
             method: 'POST',
             body: JSON.stringify(data),
@@ -16,18 +16,17 @@ addData(data) {
                 'Content-Type': 'application/json'
             }
         }
-        console.log(data);
-        return this._fetch(options);
+        return this._fetch(options, '/excursions');
     }
 
-removeData(id) {
+    removeData(id) {
         const options = {
             method: 'DELETE'
         };
-        return this._fetch(options, `/${id}`);
+        return this._fetch(options, `/excursions/${id}`);
     }
 
-updateData(id, data) {
+    updateData(id, data) {
         const options = {
             method: 'PUT',
             body: JSON.stringify(data),
@@ -35,10 +34,10 @@ updateData(id, data) {
                 'Content-Type': 'application/json'
             }
         }
-        return this._fetch(options, `/${id}`);
+        return this._fetch(options, `/excursions/${id}`);
     }
 
-_fetch(options, additionalPath = '') {
+    _fetch(options, additionalPath = '/excursions') {
         const url = this.url + additionalPath;
         return fetch(url, options)
             .then(resp => {
@@ -47,6 +46,41 @@ _fetch(options, additionalPath = '') {
                 }
                 return Promise.reject(resp);
             });
+    }
+
+    loadOrders() {
+        return this._fetchOrder()
+    }
+
+    _fetchOrder(options, additionalPath = '/orders') {
+        const url = this.url + additionalPath;
+        return fetch(url, options)
+            .then(resp => {
+                if (resp.ok) {
+                    return resp.json();
+                }
+                return Promise.reject(resp);
+            });
+    }
+
+    addToBasket(data) {
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        console.log(data);
+        return this._fetch(options, '/orders');
+    }
+
+    removeFromBasket(id) {
+        const options = {
+            method: 'DELETE'
+        };
+        // const id
+        return this._fetchOrder(options, `/orders/${id}`);
     }
 
     // ----------------------------------------------------------------

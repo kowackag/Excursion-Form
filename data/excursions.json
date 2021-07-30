@@ -1,19 +1,36 @@
 {
   "excursions": [
     {
-      "name": "kołobrzeg",
+      "name": "Warszawa",
       "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime!",
-      "adultsPrice": "109",
-      "childrenPrice": "78",
-      "id": 3
+      "adultsPrice": "100",
+      "childrenPrice": "90",
+      "id": 2
     },
     {
       "name": "Kielce",
-      "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime! ",
+      "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime!",
       "adultsPrice": "45",
-      "childrenPrice": "25",
+      "childrenPrice": "35",
       "id": 5
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "name": "Kielce",
+      "adultsPrice": "45",
+      "adultsNumber": "",
+      "childrenPrice": "35",
+      "childrenNumber": "",
+      "id": 3
+    },
+    {
+      "name": "Warszawa",
+      "adultsPrice": "100",
+      "adultsNumber": "2",
+      "childrenPrice": "90",
+      "childrenNumber": "",
+      "id": 8
+    }
+  ]
 }
