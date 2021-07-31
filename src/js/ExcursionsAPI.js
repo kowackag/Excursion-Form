@@ -63,7 +63,7 @@ class ExcursionsAPI {
             });
     }
 
-    addToBasket(data) {
+    addOrders(data) {
         const options = {
             method: 'POST',
             body: JSON.stringify(data),
@@ -75,7 +75,7 @@ class ExcursionsAPI {
         return this._fetch(options, '/orders');
     }
 
-    removeFromBasket(id) {
+    removeOrders(id) {
         const options = {
             method: 'DELETE'
         };

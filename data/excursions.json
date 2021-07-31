@@ -17,20 +17,12 @@
   ],
   "orders": [
     {
-      "name": "Kielce",
-      "adultsPrice": "45",
-      "adultsNumber": "",
-      "childrenPrice": "35",
-      "childrenNumber": "",
-      "id": 3
-    },
-    {
       "name": "Warszawa",
-      "adultsPrice": "100",
-      "adultsNumber": "2",
-      "childrenPrice": "90",
-      "childrenNumber": "",
-      "id": 8
+      "adultsPrice": 100,
+      "adultsNumber": 2,
+      "childrenPrice": 90,
+      "childrenNumber": 2,
+      "id": 2
     }
   ]
 }
