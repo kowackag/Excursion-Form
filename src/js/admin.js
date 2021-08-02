@@ -8,7 +8,6 @@ const prototype = document.querySelector('.excursions__item--prototype');
 const ulEl = document.querySelector('.excursions');
 
 function init() {
-    console.log('admin');
     loadExcursions();
     addExcursions();
     removeExcursions();

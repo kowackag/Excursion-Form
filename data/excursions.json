@@ -1,6 +1,5 @@
 {
-  "excursions": [
-    {
+  "excursions": [{
       "name": "Warszawa",
       "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime!",
       "adultsPrice": "100",
@@ -15,14 +14,24 @@
       "id": 5
     }
   ],
-  "orders": [
-    {
+  "basket": [{
       "name": "Warszawa",
       "adultsPrice": 100,
       "adultsNumber": 2,
       "childrenPrice": 90,
       "childrenNumber": 2,
+      "id": 1
+    },
+    {
+      "name": "Kielce",
+      "adultsPrice": 45,
+      "adultsNumber": 2,
+      "childrenPrice": 35,
+      "childrenNumber": 2,
       "id": 2
     }
+  ],
+  "orders": [
+
   ]
 }

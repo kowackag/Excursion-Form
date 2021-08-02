@@ -17,8 +17,7 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.js$/,
                 // określam jakie pliki 
                 // będą brane pod uwagę

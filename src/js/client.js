@@ -3,18 +3,23 @@ import './../css/client.css';
 import ExcursionsAPI from './ExcursionsAPI';
 const excursions = new ExcursionsAPI();
 
+import Basket from './Basket';
+const basket = new Basket();
+
 document.addEventListener('DOMContentLoaded', init);
 const ulEl = document.querySelector('.excursions');
 const prototypeExcursion = document.querySelector('.excursions__item--prototype');
 const summaryEl = document.querySelector('.summary');
 const prototypeOrder = document.querySelector('.summary__item--prototype')
-
+const formPanelOrderEl = document.querySelector('.panel__order');
 
 function init() {
     loadExcursions();
-    addExcursionToBasket();
     loadBasket(); //Czy nie powinnam dodać ładowania z orders z excursion.json?? czy zostawić tylko ładowanie do koszyka na event "submit" ??
-    removeFromBasket();
+    // countOrderTotalPrice();
+    ulEl.addEventListener('submit', addExcursionToBasket);
+    summaryEl.addEventListener('click', removeFromBasket);
+    formPanelOrderEl.addEventListener('submit', sendOrder);
 }
 
 function loadExcursions() {
@@ -31,35 +36,45 @@ function insertExcursions(data) {
     })
 }
 
-function addExcursionToBasket() {
-    ulEl.addEventListener('submit', e => {
-        e.preventDefault();
-        const {
-            name,
-            adultsPrice,
-            adultsNumber,
-            childrenPrice,
-            childrenNumber
-        } = getExcursionData(e.target);
-        const data = {
-            name,
-            adultsPrice,
-            adultsNumber,
-            childrenPrice,
-            childrenNumber
-        }
-        if (checkNumbers(adultsNumber, childrenNumber)) {
-            removeIfInBasket(name);
-            excursions.addOrders(data)
-                .catch(err => console.error(err))
-                .finally(() => loadBasket());
-        }
-    })
+function addExcursionToBasket(e) {
+    e.preventDefault();
+    const {
+        name,
+        adultsPrice,
+        adultsNumber,
+        childrenPrice,
+        childrenNumber
+    } = getExcursionData(e.target);
+    const data = {
+        name,
+        adultsPrice,
+        adultsNumber,
+        childrenPrice,
+        childrenNumber
+    }
+    if (checkNumbers(adultsNumber, childrenNumber)) {
+        basket.load() //nie mogłam sobie poradzić by to uprościć 
+            .then(data => {
+                data.forEach(element => {
+                    if (name === element.name) {
+                        basket.removeExcursion(element.id)
+                    }
+                })
+            })
+            .then(() => {
+                basket.addExcursion(data)
+                    .then(() => loadBasket())
+            })
+            .catch(err => console.error(err))
+    }
 }
 
 function loadBasket() {
-    excursions.loadOrders()
-        .then(data => showExcursionInBasket(data))
+    basket.load()
+        .then(data => {
+            showExcursionInBasket(data);
+            countOrderTotalPrice(data);
+        })
         .catch(err => console.error(err))
 }
 
@@ -71,20 +86,67 @@ function showExcursionInBasket(data) {
     })
 }
 
-function removeFromBasket() {
-    summaryEl.addEventListener('click', e => {
-        e.preventDefault();
-        if (e.target.tagName === 'A') {
-            const currentLiEl = e.target.parentElement.parentElement;
-            console.log(currentLiEl.dataset.id);
-            excursions.removeOrders(currentLiEl.dataset.id)
-                .catch(err => console.error(err))
-                .finally(() => loadBasket());
-            // countOrderTotalPrice();
-        }
-    })
+function removeFromBasket(e) {
+    e.preventDefault();
+    if (e.target.tagName === 'A') {
+        const currentLiEl = e.target.parentElement.parentElement;
+        basket.removeExcursion(currentLiEl.dataset.id)
+            .catch(err => console.error(err))
+            .finally(() => loadBasket());
+    }
 }
 
+function countOrderTotalPrice(data) {
+    const orderTotalPriceEl = document.querySelector('.order__total-price-value');
+    let totalPrice = 0;
+    data.forEach(element => {
+        totalPrice += (element.adultsPrice * element.adultsNumber + element.childrenPrice * element.childrenNumber);
+    })
+    orderTotalPriceEl.innerText = totalPrice + 'PLN';
+}
+
+
+function sendOrder(e) {
+    e.preventDefault();
+    const orderTotalPrice = e.target.querySelector('.order__total-price-value').innerText;
+    const customerName = e.target.querySelector('[name="name"]').value;
+    const mailAdress = e.target.querySelector('[name="email"]').value;
+    if (!checkData(customerName, mailAdress, orderTotalPrice)) {
+        e.preventDefault();
+    } else {
+        alert(`Wysłałeś zamówienie. Wkrótce otrzymasz potwierdzenie na adres: ${mailAdress}`);
+
+        // basket.load()
+        //     .then(() => {
+        //         const order = {
+        //             customerName,
+        //             mailAdress,
+        //             excursion: {}
+        //             // excursion: item.name
+        //         };
+        //         excursions.addOrders(order);
+        //     })
+        basket.load()
+            .then(data => {
+                data.forEach(item => {
+                    console.log(item);
+                    let order = {
+                        customerName,
+                        mailAdress,
+                        excursion: []
+                    }
+                    order.excursion.push(item);
+                    return order;
+                })
+
+            })
+            .then(() => {
+                excursions.addOrders(order);
+                basket.removeExcursion(item.id)
+                    .then(() => loadBasket());
+            })
+    }
+}
 // ------------------------------------------------------------
 
 function createLiEl(element) {
@@ -118,16 +180,6 @@ function getExcursionData(item) {
         childrenPrice,
         childrenNumber
     }
-}
-
-function removeIfInBasket(name) {
-    excursions.loadOrders()
-        .then(data => data.forEach(element => {
-            if (name === element.name) {
-                excursions.removeOrders(element.id);
-            }
-        }))
-        .catch(err => console.error(err))
 }
 
 function prepareOrderEl(element) {
@@ -164,4 +216,21 @@ function showErrors(err) {
         txt += `${item} \n`;
     })
     alert(`${txt}`);
+}
+
+function checkData(name, email, order) {
+    const errors = [];
+    if (name.length < 1) {
+        errors.push('Pole "Imię i Nazwisko" nie może byc puste.');
+    }
+    if (!email.includes('@')) {
+        errors.push('Podano błędny email.');
+    }
+    if (order === '0PLN') {
+        errors.push('Wybierz wycieczkę zanim złożysz zamówienie.');
+    }
+    if (errors.length > 0) {
+        showErrors(errors);
+    }
+    return errors.length > 0 ? false : true;
 }
