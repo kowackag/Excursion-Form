@@ -115,35 +115,28 @@ function sendOrder(e) {
         e.preventDefault();
     } else {
         alert(`Wysłałeś zamówienie. Wkrótce otrzymasz potwierdzenie na adres: ${mailAdress}`);
-
-        // basket.load()
-        //     .then(() => {
-        //         const order = {
-        //             customerName,
-        //             mailAdress,
-        //             excursion: {}
-        //             // excursion: item.name
-        //         };
-        //         excursions.addOrders(order);
-        //     })
+        let order = {
+            customerName,
+            mailAdress,
+            excursion: []
+        }
         basket.load()
             .then(data => {
                 data.forEach(item => {
-                    console.log(item);
-                    let order = {
-                        customerName,
-                        mailAdress,
-                        excursion: []
+                    const excursion = {
+                        name: item.name,
+                        adultsPrice: item.adultsPrice,
+                        adultsNumber: item.adultsNumber,
+                        childrenPrice: item.childrenPrice,
+                        childrenNumber: item.childrenNumber,
                     }
-                    order.excursion.push(item);
-                    return order;
+                    order.excursion.push(excursion);
+                    basket.removeExcursion(item.id)
+                        .then(() => loadBasket());
                 })
-
             })
             .then(() => {
                 excursions.addOrders(order);
-                basket.removeExcursion(item.id)
-                    .then(() => loadBasket());
             })
     }
 }

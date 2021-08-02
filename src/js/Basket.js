@@ -17,18 +17,7 @@ class Basket {
         }
         return this._fetch(options, '');
     }
-
-    // updateOrders(id, data) { 
-    //     const options = {
-    //         method: 'PUT',
-    //         body: JSON.stringify(data),
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }
-    //     return this._fetch(options, `/orders/${id}`);
-    // }
-
+    
     removeExcursion(id) {
         const options = {
             method: 'DELETE'

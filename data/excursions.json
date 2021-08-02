@@ -1,5 +1,6 @@
 {
-  "excursions": [{
+  "excursions": [
+    {
       "name": "Warszawa",
       "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime!",
       "adultsPrice": "100",
@@ -14,24 +15,42 @@
       "id": 5
     }
   ],
-  "basket": [{
-      "name": "Warszawa",
-      "adultsPrice": 100,
-      "adultsNumber": 2,
-      "childrenPrice": 90,
-      "childrenNumber": 2,
+  "basket": [],
+  "orders": [
+    {
+      "customerName": "MAŁGORZATA KOWACKA",
+      "mailAdress": "gosiek92@wp.pl",
+      "excursion": [
+        {
+          "name": "Warszawa",
+          "adultsPrice": 100,
+          "adultsNumber": 2,
+          "childrenPrice": 90,
+          "childrenNumber": 2
+        },
+        {
+          "name": "Kielce",
+          "adultsPrice": 45,
+          "adultsNumber": 2,
+          "childrenPrice": 35,
+          "childrenNumber": 2
+        }
+      ],
       "id": 1
     },
     {
-      "name": "Kielce",
-      "adultsPrice": 45,
-      "adultsNumber": 2,
-      "childrenPrice": 35,
-      "childrenNumber": 2,
+      "customerName": "MAŁGORZATA KOWACKA",
+      "mailAdress": "gosia_kow@gazeta.pl",
+      "excursion": [
+        {
+          "name": "Warszawa",
+          "adultsPrice": 100,
+          "adultsNumber": 22,
+          "childrenPrice": 90,
+          "childrenNumber": 2
+        }
+      ],
       "id": 2
     }
-  ],
-  "orders": [
-
   ]
 }

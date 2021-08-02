@@ -46,7 +46,6 @@ class ExcursionsAPI {
                 return Promise.reject(resp);
             });
     }
-    // loadOrders()
 
     addOrders(data) {
         const options = {
@@ -59,16 +58,6 @@ class ExcursionsAPI {
         return this._fetch(options, '/orders');
     }
 
-    // _fetchOrders(options, additionalPath = '') {
-    //     const url = this.url + additionalPath;
-    //     return fetch(url, options)
-    //         .then(resp => {
-    //             if (resp.ok) {
-    //                 return resp.json();
-    //             }
-    //             return Promise.reject(resp);
-    //         });
-    // }
 }
 
 export default ExcursionsAPI;
