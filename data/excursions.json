@@ -3,19 +3,18 @@
     {
       "name": "Warszawa",
       "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime!",
-      "adultsPrice": "100",
+      "adultsPrice": "190",
       "childrenPrice": "90",
       "id": 2
     },
     {
       "name": "Kielce",
       "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime!",
-      "adultsPrice": "45",
+      "adultsPrice": "55",
       "childrenPrice": "35",
       "id": 5
     }
   ],
-  "basket": [],
   "orders": [
     {
       "customerName": "MAŁGORZATA KOWACKA",
@@ -51,6 +50,48 @@
         }
       ],
       "id": 2
+    },
+    {
+      "customerName": "MAŁGORZATA KOWACKA",
+      "mailAdress": "jkwasniowska@gmail.com",
+      "excursion": [
+        {
+          "name": "Kielce",
+          "adultsPrice": 45,
+          "adultsNumber": 2,
+          "childrenPrice": 35,
+          "childrenNumber": 6
+        },
+        {
+          "name": "Warszawa",
+          "adultsPrice": 100,
+          "adultsNumber": 2,
+          "childrenPrice": 90,
+          "childrenNumber": 6
+        }
+      ],
+      "id": 3
+    },
+    {
+      "customerName": "MAŁGORZATA KOWACKA",
+      "mailAdress": "mariakg@poczta.fm",
+      "excursion": [
+        {
+          "name": "Kielce",
+          "adultsPrice": 45,
+          "adultsNumber": 22,
+          "childrenPrice": 35,
+          "childrenNumber": 2
+        },
+        {
+          "name": "Warszawa",
+          "adultsPrice": 100,
+          "adultsNumber": 2,
+          "childrenPrice": 90,
+          "childrenNumber": 6
+        }
+      ],
+      "id": 4
     }
   ]
 }

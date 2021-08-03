@@ -3,20 +3,16 @@ import './../css/client.css';
 import ExcursionsAPI from './ExcursionsAPI';
 const excursions = new ExcursionsAPI();
 
-import Basket from './Basket';
-const basket = new Basket();
-
 document.addEventListener('DOMContentLoaded', init);
 const ulEl = document.querySelector('.excursions');
 const prototypeExcursion = document.querySelector('.excursions__item--prototype');
 const summaryEl = document.querySelector('.summary');
 const prototypeOrder = document.querySelector('.summary__item--prototype')
 const formPanelOrderEl = document.querySelector('.panel__order');
+let basket = [];
 
 function init() {
     loadExcursions();
-    loadBasket(); //Czy nie powinnam dodać ładowania z orders z excursion.json?? czy zostawić tylko ładowanie do koszyka na event "submit" ??
-    // countOrderTotalPrice();
     ulEl.addEventListener('submit', addExcursionToBasket);
     summaryEl.addEventListener('click', removeFromBasket);
     formPanelOrderEl.addEventListener('submit', sendOrder);
@@ -53,29 +49,15 @@ function addExcursionToBasket(e) {
         childrenNumber
     }
     if (checkNumbers(adultsNumber, childrenNumber)) {
-        basket.load() //nie mogłam sobie poradzić by to uprościć 
-            .then(data => {
-                data.forEach(element => {
-                    if (name === element.name) {
-                        basket.removeExcursion(element.id)
-                    }
-                })
-            })
-            .then(() => {
-                basket.addExcursion(data)
-                    .then(() => loadBasket())
-            })
-            .catch(err => console.error(err))
-    }
-}
-
-function loadBasket() {
-    basket.load()
-        .then(data => {
-            showExcursionInBasket(data);
-            countOrderTotalPrice(data);
+        basket.forEach(element => {
+            if (name === element.name) {
+                removeElementFromArray(element, basket);
+            }
         })
-        .catch(err => console.error(err))
+        basket.push(data);
+        showExcursionInBasket(basket);
+        countOrderTotalPrice(basket);
+    }
 }
 
 function showExcursionInBasket(data) {
@@ -84,16 +66,6 @@ function showExcursionInBasket(data) {
         const newOrderEl = prepareOrderEl(element);
         summaryEl.appendChild(newOrderEl);
     })
-}
-
-function removeFromBasket(e) {
-    e.preventDefault();
-    if (e.target.tagName === 'A') {
-        const currentLiEl = e.target.parentElement.parentElement;
-        basket.removeExcursion(currentLiEl.dataset.id)
-            .catch(err => console.error(err))
-            .finally(() => loadBasket());
-    }
 }
 
 function countOrderTotalPrice(data) {
@@ -105,6 +77,20 @@ function countOrderTotalPrice(data) {
     orderTotalPriceEl.innerText = totalPrice + 'PLN';
 }
 
+function removeFromBasket(e) {
+    e.preventDefault();
+    if (e.target.tagName === 'A') {
+        const currentTitleEl = e.target.parentElement;
+        const name = currentTitleEl.querySelector('.summary__name').innerText;
+        basket.forEach(element => {
+            if (name === element.name) {
+                removeElementFromArray(element, basket);
+            }
+        })
+        showExcursionInBasket(basket);
+        countOrderTotalPrice(basket);
+    }
+}
 
 function sendOrder(e) {
     e.preventDefault();
@@ -120,24 +106,21 @@ function sendOrder(e) {
             mailAdress,
             excursion: []
         }
-        basket.load()
-            .then(data => {
-                data.forEach(item => {
-                    const excursion = {
-                        name: item.name,
-                        adultsPrice: item.adultsPrice,
-                        adultsNumber: item.adultsNumber,
-                        childrenPrice: item.childrenPrice,
-                        childrenNumber: item.childrenNumber,
-                    }
-                    order.excursion.push(excursion);
-                    basket.removeExcursion(item.id)
-                        .then(() => loadBasket());
-                })
-            })
-            .then(() => {
-                excursions.addOrders(order);
-            })
+        basket.forEach(element => {
+            const excursion = {
+                name: element.name,
+                adultsPrice: element.adultsPrice,
+                adultsNumber: element.adultsNumber,
+                childrenPrice: element.childrenPrice,
+                childrenNumber: element.childrenNumber,
+            }
+            order.excursion.push(excursion);
+            basket = [];
+            showExcursionInBasket(basket);
+            countOrderTotalPrice(basket);
+        })
+        excursions.addOrders(order)
+            .catch(err => console.error(err))
     }
 }
 // ------------------------------------------------------------
@@ -181,11 +164,15 @@ function prepareOrderEl(element) {
     const titleEl = newLiEl.querySelector('.summary__name');
     const summaryTotalPriceEl = newLiEl.querySelector('.summary__total-price');
     const paragrafEl = newLiEl.querySelector('.summary__prices');
-    newLiEl.dataset.id = element.id;
     titleEl.innerText = element.name;
     summaryTotalPriceEl.innerText = `${element.adultsPrice*element.adultsNumber + element.childrenPrice*element.childrenNumber}PLN`;
     paragrafEl.innerText = `${ element.adultsNumber === 0 ? '' : 'dorośli: ' + element.adultsNumber + ' x ' + element.adultsPrice + 'PLN'} ${element.adultsNumber!== 0 && element.childrenNumber !== 0 ? ',':''} ${ element.childrenNumber === 0 ? '' : 'dzieci: ' + element.childrenNumber + ' x ' + element.childrenPrice + 'PLN'}`;
     return newLiEl;
+}
+
+function removeElementFromArray(element, arr) {
+    const index = arr.indexOf(element)
+    arr.splice(index, 1);
 }
 
 // ----------WALIDACJA DANYCH ----------

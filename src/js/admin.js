@@ -67,20 +67,20 @@ function updateExcursions() {
         e.preventDefault();
         if (e.target.className.includes('excursions__field-input--update')) {
             const liEl = e.target.parentElement.parentElement.parentElement;
-            const childrenList = [...liEl.querySelectorAll('.excursions__field-name strong, .excursions__description, .excursions__title')];
+            const [name, description, adultsPrice, childrenPrice] = [...liEl.querySelectorAll('.excursions__field-name strong, .excursions__description, .excursions__title')];
             if (e.target.value === 'edytuj') {
                 e.target.value = 'zapisz';
-                childrenList.forEach(item => item.contentEditable = 'true');
+                [name, description, adultsPrice, childrenPrice].forEach(item => item.contentEditable = 'true');
             } else {
                 const id = liEl.dataset.id;
                 const data = {
-                    name: childrenList[0].innerText,
-                    description: childrenList[1].innerText,
-                    adultsPrice: childrenList[2].innerText,
-                    childrenPrice: childrenList[3].innerText
+                    name: name.innerText,
+                    description: description.innerText,
+                    adultsPrice: adultsPrice.innerText,
+                    childrenPrice: childrenPrice.innerText
                 }
                 e.target.value = 'edytuj';
-                childrenList.forEach(item => item.contentEditable = 'false')
+                [name, description, adultsPrice, childrenPrice].forEach(item => item.contentEditable = 'false')
                 excursions.updateData(id, data)
                     .catch(err => console.error(err))
                     .finally(() => loadExcursions());
