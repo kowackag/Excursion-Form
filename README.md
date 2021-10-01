@@ -1,121 +1,150 @@
-> ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
-> 
-> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.* 
+![screen of your app](https://via.placeholder.com/1000x300)
+
+# EXCURSIONS FORM (API and FETCH)
 
 &nbsp;
 
+## Table of contents
 
-# JavaScript: API oraz FETCH
+[⭐ Overview](#⭐-overview)
+  - [The challenge](#the-challenge)
+  - [Instalation](#Installation-💿)
+  - [Links](#links)
+  - [Screenshot](#screenshot)
 
-## Wprowadzanie
+[💡 My process](#💡-my-process)
+  - [Technologies](#Technologies)
+  - [Solutions provided in the project](#Solutions-provided-in-the-project)
+  - [Useful resources](#useful-resources)
+  - [Copyrights](#copyrights)
 
-Wracamy do naszego zlecenia związanego z wycieczkami. Tym razem postanowiliśmy przebudować kod wykorzystując nowo poznane informacje.
+[🙋‍♂️ Author](#🙋‍♂️-author)
 
-Podzielimy naszą aplikację na 2 części. 
+[👏 Special Thanks](#👏-special-thanks)
 
-### Client
+&nbsp;
 
-Funkcjonalność związana z tym co może zrobić użytkownik tj.:
-* wybrać wycieczkę poprzez wprowadzenie ilość zamawianych biletów w odpowiednie pole formularza i kliknięcie `dodaj do zamówienia`
-    * walidacja danych
-    * zamówienie jest dodawana do panelu z prawej strony tj. do koszyka
-    * cena za całość jest aktualizowana
-* potwierdzenie zamówienia poprzez wprowadzenie imienia, nazwiska oraz adresu email do pola zamówienia i kliknięcia `zamawiam`
-    * walidacja danych
-    * wysłanie zamówienia do bazy danych (u nas to będzie API uruchomione dzięki JSON Server)
-    * wyczyszczenie "koszyka"
+## ⭐ Overview
 
-Pliki powiązane:
+&nbsp;
+
+### **The challenge:**
+
+The challenge was to prepare application to manage the excursions. 
+The application consists of two parts with separate panels dedicated to:
+
+**`Client`**
+
+Excursions booking panel enabling:
+- ordering the excursions (by entering the number of tickets in the appropriate field of the form) including
+    - data validation
+    - adding excursions to the basket
+    - updating the total price for the order
+- order confirmation (by entering the name, surname and email address into the order field) including
+    - data validation
+    - sending the order to the database (API that is run thanks to JSON Server)
+    - clear basket
+
+Related files:
 * `./src/index.html`
 * `./src/js/client.js`
 * `./src/css/client.css`
 
-### Admin    
-Panel zarządzania wycieczkami zapisanych w bazie danych: 
-* dodawanie wycieczek
-* usuwanie wycieczek
-* modyfikowanie wycieczek
+**`Admin`**
 
-Pliki powiązane
-* `./src/admin.html`
-* `./src/js/admin.js`
-* `./src/css/admin.css`
+Excursions management panel enabling:
+- adding excursions
+- deleting excursions
+- updating excursions
 
-## Implementacja
-
-### Webpack
-
-W tym zadaniu wykorzystamy webpack-a, którego omawialiśmy przy materiale dotyczącym ES2015+. 
-
-Zauważ, że posiada on dodatkową konfigurację, która obsługuje podział aplikacji na 2 cześci. Zwróć szczególną uwage na tzw. chunks.
-
-Webpack również zajmuje się wczytaniem plików css (zobacz importy w `client.js` oraz `admin.js`) dzięki odpowiednim loader-om w `webpack.config.js` dla plików o rozszerzeniu `.css`. Style są wczytywane do `<head>` więc się nie zdziw, że pliki `css` nie są generowane.
-
-Pamiętaj, aby zainstalować wszystkie zależności przed uruchomieniem webpack-a tj.
-```
-npm install
-```
-Potem dopiero możesz go uruchomić poprzez `npm start`.
-
-Jeśli chcesz odpalić wersję `client` to wystarczy wpisać w przeglądarkę `http://localhost:8080/index.html` natomiast `admin` będzie dostępny pod adresem: `http://localhost:8080/admin.html`.
-
-> **Uwaga!** Jeśli nie widzisz poprawnych "linii" błędów w konsoli to prawodpodobnie nie masz włączonej obsługi source maps dla plików JavaScript. Możesz to zmienić w [ustawieniach przeglądarki Chrome](https://developers.google.com/web/tools/chrome-devtools/javascript/source-maps).
-
-### JSON Server
-
-Podczas przerabiania materiałów zainstalowaliśmy globalnie JSON Server dlatego nie musimy go instalować - wystarczy, że go uruchomimy. Pamietaj, że bez jego uruchomienia nasze API nie będzie działać. 
-
-Odpalamy kolejny terminal (webpack już jest uruchomiony w jednym) i przechodzimy do katalogu głównego z zadaniem. Następnie wpisujemy do terminala:
-```
-json-server --watch ./data/excursions.json
-```
-
-Od teraz API będzie dostępne pod adresem: http://localhost:3000, jednak zauważ, że w pliku mamy dwa różne zasoby tj.
-* excursions
-* orders
-
-W zależności od tego na jakich danych będziesz chciał pracować to będziesz do `fetch()` przekazywać inny URL tj.
-* http://localost:3000/excursions - zarządzanie wycieczkami
-* http://localost:3000/orders - zarządzanie zamówieniami
-
-### Fetch
-
-Nasza komunikacja z uruchomionym API będzie się odbywać przy pomocy `fetch()`, który został opisany w przerabianych materiałach.
-
-Choć `fetch()` jest mocno [wspierany przez najnowsze przeglądarki](https://caniuse.com/#feat=fetch) to nie powinniśmy zapominać o wsparciu dla starszych rozwiązań.
-
-W takim przypadku możemy wykorzystać tzw. polyfill, który doda niewspieraną przez przeglądarkę funkcjonalność.
-
-Możesz do tego wykorzystać [whatwg-fetch](https://github.com/github/fetch).
-
-### ExcursionsAPI
-
-W katalogu `./src/js` znajdziesz plik `ExcursionsAPI.js`, który zawiera klasę o tej samej nazwie.
-
-Został on stworzony, aby przechowywać w jednym miejscu całą komunikację z API.
-
-To tutaj powinny być zdefiniowane metody, które odpytują API np. pobieranie wycieczek czy ich dodawanie.
-
-Ta klasa będzie używana po stronie `client` jak i `admin` dlatego też została ona zaimportowana do obu plików JS odpowiedzialnych za każdą z części.
-
-### Prototypy
-
-Zauważ, że w kodzie wystąpują prototypy (`.*--prototype`) są one używane tylko po to, aby ułatwić prezentację danych. 
-
-Docelowo mają być one niewidoczne - możesz je ukryć przy pomocy CSS (`display: none`). Natomiast może warto je wykorzystać do skopiowania struktury kodu HTML, aby nie musieć tego robić w kodzie JS.
-
-## Podsumowanie
-
-Postaraj sie wykonać to zadanie w taki sposób, aby zarządzanie wycieczkami było wygodne, a ich zamawianie intuicyjnie. 
-
-Miej cały czas z tyłu głowy myśl, że może kiedyś znów będzie trzeba przebudować lub wykorzystać w innym projekcie napisany kod dlatego powinien być on jak najbardziej elastyczny (zasada pojedyńczej odpowiedzialności).
-
-Jeśli potrzebujesz to możesz zmodyfikować HTML oraz CSS, aby zwiększyć funkcjonalność całego rozwiązania.
-
-
+Related files:
+- `./src/admin.html`
+- `./src/js/admin.js`
+- `./src/css/admin.css`
 
 &nbsp;
 
-> ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
-> 
-> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.* 
+### **Installation 💿**
+
+The project uses [node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [webpack](https://webpack.js.org/) and compiler [babel](https://babeljs.io/setup#installation) as well as package [JSON-server](https://www.npmjs.com/package/json-server) and [whatwg-fetch](https://github.com/github/fetch).
+
+Having them installed, type into the terminal: 
+```
+npm i
+```
+Then, you may run webpack typing in the terminal:
+
+```
+npm start
+```
+To run JSON-Server, type in the second terminal:
+``` 
+json-server --watch ./data/excursions.json
+```
+The client and admin versions are available using the following addresses:
+- http://localhost:8080/admin.html - admin
+- http://localhost:8080/index.html - client
+
+
+
+### **Links:**
+- [GitHub](https://github.com/kowackag/Excursion-Form.git)
+
+### **Screenshot:**
+
+&nbsp;
+ 
+## 💡 My process
+
+&nbsp;
+
+### **Technologies:**
+
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
+&nbsp;
+  
+### **Solutions provided in the project:**
+- HTML:
+    - The project was built using semantic HTML5 markup.
+- CSS:
+    - The css styles (`client.css` and` admin.css`) are loaded into `<head>` section  thanks to `webpack`, using the appropriate loader in `webpack.config.js` for files with the extension` .css`.
+    - The form was made using CSS Grid layout.
+    - It was prepared with Mobile-first approach.
+- JS:
+    - To store all communication with the API in one place, the class ExcursionsAPI was created (in the separated file `ExcursionsAPI.js`).
+    - This class is used on both the `client` and` admin` sides and it was imported into both JS files responsible for each part.
+    - Communication with API is based on `fetch()` method.
+    - To run the project using browsers that do not support `fetch()` method, package `whatwg-fetch` was used.
+
+&nbsp;
+ 
+### **Conclusions for future projects:** 
+
+I would like to improve the design skills to will be able to prepare  more eye-friendly and intuitive user interface during projecting future websites and apps. 
+
+&nbsp;
+
+### **Useful resources:**
+
+- [Google Font](https://fonts.google.com/specimen/Poppins) - Font (`Poppins`)
+- [Font Awesome](https://fontawesome.com/) - Icons. 
+
+&nbsp;
+
+## 🙋‍♂️ Author
+
+The project was made by Małgorzata Kowacka.
+- kowackag@gmail.com
+- GitHub - [kowackag](https://github.com/kowackag)
+- Linked - [Małgorzata Kowacka](https://www.linkedin.com/in/ma%C5%82gorzata-kowacka-0258a812a/)
+
+ **If you have any questions do not hesitate to contact me.**
+
+&nbsp;
+
+## 👏 Special thanks  
+Thanks to my [Mentor - devmentor.pl](https://devmentor.pl/) - for providing me with this task and for code review.
+
