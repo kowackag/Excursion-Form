@@ -46,7 +46,7 @@ function addExcursions() {
         }
         excursions.addData(data)
             .catch(err => console.error(err))
-            .finally(() => loadExcursions());
+            .finally(() => loadExcursions())
     })
 }
 

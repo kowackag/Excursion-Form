@@ -3,7 +3,7 @@
     {
       "name": "Warszawa",
       "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime!",
-      "adultsPrice": "190",
+      "adultsPrice": "124",
       "childrenPrice": "90",
       "id": 2
     },
@@ -13,6 +13,20 @@
       "adultsPrice": "55",
       "childrenPrice": "35",
       "id": 5
+    },
+    {
+      "name": "Krynica Zdrój",
+      "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime!",
+      "adultsPrice": "105",
+      "childrenPrice": "80",
+      "id": 7
+    },
+    {
+      "name": "Kołobrzeg",
+      "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam laboriosam quaerat temporibus dicta vitae maxime! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet aliquam quam .",
+      "adultsPrice": "110",
+      "childrenPrice": "75",
+      "id": 8
     }
   ],
   "orders": [

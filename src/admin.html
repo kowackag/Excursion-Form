@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h1>Panel administratora</h1>
+    <h1 class="title">Panel administratora</h1>
     <section class="panel">
         <ul class="panel__excursions excursions">
             <li data-id="1" class="excursions__item excursions__item--prototype">
@@ -19,20 +19,22 @@
                         aliquam quam laboriosam quaerat temporibus dicta vitae maxime! Nemo, nobis veritatis?</p>
                 </header>
                 <form class="excursions__form">
-                    <div class="excursions__field">
-                        <label class="excursions__field-name">
-                            Dorosły: <strong>99</strong>PLN
-                        </label>
-                    </div>
-                    <div class="excursions__field">
-                        <label class="excursions__field-name">
-                            Dziecko: <strong>50</strong>PLN
-                        </label>
+                    <div>
+                        <div class="excursions__field">
+                            <label class="excursions__field-name">
+                                Dorosły: <strong>99</strong>PLN
+                            </label>
+                        </div>
+                        <div class="excursions__field">
+                            <label class="excursions__field-name">
+                                Dziecko: <strong>50</strong>PLN
+                            </label>
+                        </div>
                     </div>
                     <div class="excursions__field excursions__field--submit">
-                        <input class="excursions__field-input excursions__field-input--update" value="edytuj"
+                        <input class="btn excursions__field-input--update" value="edytuj"
                             type="submit" />
-                        <input class="excursions__field-input excursions__field-input--remove" value="usuń"
+                        <input class="btn excursions__field-input--remove" value="usuń"
                             type="submit" />
                     </div>
                 </form>
@@ -42,26 +44,24 @@
             <form class="form" novalidate>
                 <div class="form__row">
                     <label class="form__label">
-                        Nazwa:<input class="form__field" name="name" />
+                        Nazwa:
                     </label>
+                    <input class="form__field" name="name" />
                 </div>
                 <div class="form__row">
-                    <label class="form__label">
-                        Opis:<textarea class="form__field form__field--longtext" name="description"></textarea>
-                    </label>
+                    <label class="form__label">Opis:</label>
+                    <textarea class="form__field form__field--longtext" name="description"></textarea>
                 </div>
                 <div class="form__row">
-                    <label class="form__label">
-                        Cena dorosły:<input class="form__field" type="number" name="adultsPrice" />
-                    </label>
+                    <label class="form__label">Cena dorosły:</label>
+                    <input class="form__field" type="number" name="adultsPrice" />
                 </div>
                 <div class="form__row">
-                    <label class="form__label">
-                        Cena dziecko:<input class="order__form__field" type="number" name="childrenPrice" />
-                    </label>
+                    <label class="form__label">Cena dziecko:</label>
+                    <input class="order__form__field" type="number" name="childrenPrice" />
                 </div>
-                <div class="order__field order__field--submit">
-                    <input class="order__field-input order__field-submit" value="dodaj" type="submit" />
+                <div class="order__field">
+                    <input class="btn order__field-submit" value="dodaj" type="submit" />
                 </div>
             </form>
 
