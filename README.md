@@ -130,6 +130,7 @@ I would like to improve the design skills to will be able to prepare  more eye-f
 ### **Useful resources:**
 
 - [Google Font](https://fonts.google.com/specimen/Poppins) - Font (`Poppins`)
+- []
 - [Font Awesome](https://fontawesome.com/) - Icons. 
 
 &nbsp;
