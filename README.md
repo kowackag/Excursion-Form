@@ -93,6 +93,14 @@ The client and admin versions are available using the following addresses:
 ### **Screenshot:**
 
 &nbsp;
+
+Client panel: 
+
+![](./public/screen1.jpg)
+
+Admin panel:
+
+![](./public/screen2.jpg)
  
 ## 💡 My process
 
@@ -130,7 +138,6 @@ I would like to improve the design skills to will be able to prepare  more eye-f
 ### **Useful resources:**
 
 - [Google Font](https://fonts.google.com/specimen/Poppins) - Font (`Poppins`)
-- []
 - [Font Awesome](https://fontawesome.com/) - Icons. 
 
 &nbsp;
