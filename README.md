@@ -1,4 +1,4 @@
-![top](./public/top.JPG)
+![top](./public/top.jpg)
 
 # EXCURSIONS FORM (API and FETCH)
 
