@@ -96,11 +96,11 @@ The client and admin versions are available using the following addresses:
 
 Client panel: 
 
-![](./public/screen1.jpg)
+![Client panel](./public/screen1.JPG)
 
 Admin panel:
 
-![](./public/screen2.jpg)
+![Admin panel](./public/screen2.JPG)
  
 ## 💡 My process
 
