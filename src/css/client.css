@@ -21,7 +21,6 @@ ul {
     grid-column: 1 /3;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    flex-wrap: wrap;
 }
 
 .excursions__item {
